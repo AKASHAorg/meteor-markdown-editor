@@ -1,10 +1,10 @@
 Package.describe({
     name: 'akasha:markdown-editor',
-    version: '0.0.3',
+    version: '0.0.4',
     // Brief, one-line summary of the package.
     summary: 'simple markdown editor for meteor',
     // URL to the Git repository containing the source code for this package.
-    git: 'git@github.com:AkashaProject/meteor-markdown-editor.git',
+    git: 'https://github.com/AkashaProject/meteor-markdown-editor',
     // By default, Meteor will default to using README.md for documentation.
     // To avoid submitting documentation, set this field to null.
     documentation: 'README.md'
