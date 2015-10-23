@@ -14,5 +14,6 @@ This package exposes a global object called `MarkdownEditor`. To access data fro
  * `MarkdownEditor.getMd()`
  * `MarkdownEditor.getPostTitle()`
 
+[DEMO](http://akasha-markdown-editor.meteor.com)
 
  ![preview](preview.jpg)
