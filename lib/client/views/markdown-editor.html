@@ -1,0 +1,284 @@
+<template name="markdown_editor">
+    <div id="md-wrapper">
+        <div id="editor-header">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group-lg">
+                        <input type="text" placeholder="Post Title" class="form-control" id="post-title">
+                    </div>
+                </div>
+                <div class="col-md-1 hidden-xs">
+                    <button type="button" data-toggle="modal" data-target="#ed-shortCuts"
+                            class="btn btn-default btn-lg pull-right">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group-lg">
+                        <button type="button" id="tags-button" class="btn btn-default btn-lg form-control"
+                                data-toggle="modal"
+                                data-target="#tags-container">
+                            <span class="glyphicon glyphicon-tags pull-left" aria-hidden="true"></span>
+                            <span id="tags-preview"><em>tags</em></span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-md-2 pull-right hidden-xs" id="badge-count">
+                    <div class="input-group-lg">
+                        <p class="form-control text-center">Word Count <span class="badge" id="word-count">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="invisible" id="cm-toolbar">
+
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    H
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="cm-heading">
+                    <li><a href="#" data-cm="1">H1</a></li>
+                    <li><a href="#" data-cm="2">H2</a></li>
+                    <li><a href="#" data-cm="3">H3</a></li>
+                    <li><a href="#" data-cm="4">H4</a></li>
+                    <li><a href="#" data-cm="5">H5</a></li>
+                    <li><a href="#" data-cm="6">H6</a></li>
+                </ul>
+            </div>
+
+            <div class="btn-group has-cm" role="group">
+                <button type="button" data-cm="bold" class="btn btn-primary">B</button>
+                <button type="button" data-cm="emphasize" class="btn btn-primary"><em>I</em></button>
+                <button type="button" data-cm="strike" class="btn btn-primary">
+                    <del>S</del>
+                </button>
+            </div>
+
+            <div class="btn-group has-cm" role="group">
+                <button type="button" data-cm="link" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-link" aria-hidden="true">
+                    </span>
+                </button>
+                <button type="button" data-cm="list" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-cm="code" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-cm="img" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div id="working-area">
+            <div class="col-md-6 full-height col-sm-6">
+                <textarea id="md-editor"></textarea>
+            </div>
+            <div class="col-md-6 full-height hidden-xs col-sm-6" id="preview-area">
+                <div id="md-preview"></div>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tag-labels" id="tags-container">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="tag-labels">Edit tags
+                            <small> 10 max</small>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" placeholder="Tags" id="editor-tags" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ed-shortCuts" tabindex="-1" role="dialog" aria-labelledby="ed-shortCutsLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="ed-shortCutsLabel">Editor Shortcuts</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Pc</th>
+                                <th>Mac</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td><b>bold</b></td>
+                                <td>Ctrl-B</td>
+                                <td>Cmd-B</td>
+                            </tr>
+                            <tr>
+                                <td><em>italic</em></td>
+                                <td>Ctrl-I</td>
+                                <td>Cmd-I</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <del>strike</del>
+                                </td>
+                                <td>Ctrl-Alt-Ut</td>
+                                <td>Cmd-Alt-U</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">link</a></td>
+                                <td>Ctrl-K</td>
+                                <td>Cmd-K</td>
+                            </tr>
+                            <tr>
+                                <td><code>code</code></td>
+                                <td>Ctrl-Alt-K</td>
+                                <td>Cmd-Alt-K</td>
+                            </tr>
+                            <tr>
+                                <td>image</td>
+                                <td>Ctrl-Alt-I</td>
+                                <td>Cmd-Alt-I</td>
+                            </tr>
+                            <tr>
+                                <td>list</td>
+                                <td>Ctrl-L</td>
+                                <td>Cmd-Lt</td>
+                            </tr>
+                            <tr>
+                                <td>quote</td>
+                                <td>Ctrl-Q</td>
+                                <td>Cmd-Q</td>
+                            </tr>
+
+                            <tr>
+                                <td>select All</td>
+                                <td>Ctrl-A</td>
+                                <td>Cmd-A</td>
+                            </tr>
+                            <tr>
+                                <td>find</td>
+                                <td>Ctrl-F</td>
+                                <td>Cmd-F</td>
+                            </tr>
+                            <tr>
+                                <td>find Next</td>
+                                <td>Ctrl-G</td>
+                                <td>Cmd-G</td>
+                            </tr>
+                            <tr>
+                                <td>find Prev</td>
+                                <td>Shift-Ctrl-G</td>
+                                <td>Shift-Cmd-G</td>
+                            </tr>
+
+                            <tr>
+                                <td>replace</td>
+                                <td>Shift-Ctrl-F</td>
+                                <td>Cmd-Alt-F</td>
+                            </tr>
+
+                            <tr>
+                                <td>redo</td>
+                                <td>Ctrl-Y</td>
+                                <td>Cmd-Y</td>
+                            </tr>
+                            <tr>
+                                <td>delete Line</td>
+                                <td>Ctrl-D</td>
+                                <td>Cmd-D</td>
+                            </tr>
+                            <tr>
+                                <td>del Group Before</td>
+                                <td>Ctrl-Backspace</td>
+                                <td>Alt-Backspace</td>
+                            </tr>
+                            <tr>
+                                <td>del Group After</td>
+                                <td>Ctrl-Delete</td>
+                                <td>Alt-Delete</td>
+                            </tr>
+                            <tr>
+                                <td>undo</td>
+                                <td>Ctrl-Z</td>
+                                <td>Cmd-Z</td>
+                            </tr>
+                            <tr>
+                                <td>indent Less</td>
+                                <td>Ctrl-[</td>
+                                <td>Cmd-[</td>
+                            </tr>
+                            <tr>
+                                <td>indent More</td>
+                                <td>Ctrl-]</td>
+                                <td>Cmd-]</td>
+                            </tr>
+                            <tr>
+                                <td>save</td>
+                                <td>Ctrl-S</td>
+                                <td>Cmd-S</td>
+                            </tr>
+                            <tr>
+                                <td>replace All</td>
+                                <td>Shift-Ctrl-R</td>
+                                <td>Shift-Cmd-Alt-F</td>
+                            </tr>
+                            <tr>
+                                <td>go Group Right</td>
+                                <td>Ctrl-Right</td>
+                                <td>Alt-Right</td>
+                            </tr>
+                            <tr>
+                                <td>go Line End</td>
+                                <td>Alt-Right</td>
+                                <td>Cmd-Right</td>
+                            </tr>
+                            <tr>
+                                <td>go Group Left</td>
+                                <td>Ctrl-Left</td>
+                                <td>Alt-Left</td>
+                            </tr>
+                            <tr>
+                                <td>go Line Start</td>
+                                <td>Alt-Left</td>
+                                <td>Cmd-Left</td>
+                            </tr>
+                            <tr>
+                                <td>go Doc End</td>
+                                <td>Ctrl-End</td>
+                                <td>Cmd-End</td>
+                            </tr>
+                            <tr>
+                                <td>go Doc Start</td>
+                                <td>Ctrl-Home</td>
+                                <td>Cmd-Up</td>
+                            </tr>
+                            <tr>
+                                <td>go Doc End</td>
+                                <td>Ctrl-Down</td>
+                                <td>Cmd-Down</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
