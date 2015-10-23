@@ -1,2 +1,2 @@
-# Meteor Markdown Editor
+# AKASHA Markdown Editor
 
